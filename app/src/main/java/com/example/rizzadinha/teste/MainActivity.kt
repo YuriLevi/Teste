@@ -1,5 +1,6 @@
 package com.example.rizzadinha.teste
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -16,8 +17,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       //val cUsuario = Usuario("1","1")
-        //db.cargaDados(cUsuario)
+        //val cUsuario = Usuario("mariane","mariane")
+
+       // db.cargaDados(cUsuario)
 
 
     }
@@ -28,20 +30,30 @@ class MainActivity : AppCompatActivity() {
         Log.d("TRABALHO", "entrou fazerlogin")
 
 
+        if(login.text.toString().isBlank() || senha.text.toString().isBlank() )
+            Toast.makeText(this,"Preencha os campos", Toast.LENGTH_LONG).show()
+        else {
 
-            val  vUsuario = Usuario(Nome.text.toString(), Senha.text.toString())
+            val vUsuario = Usuario(login.text.toString(), senha.text.toString())
 
 
             var validaUsuario = db.verificaLogin(vUsuario)
 
-            if(validaUsuario == true){
+            if (validaUsuario == true) {
 
-                Toast.makeText(this,"Sucesso",Toast.LENGTH_LONG).show()
-            }else{
+                Toast.makeText(this, "Sucesso", Toast.LENGTH_LONG).show()
 
-                Toast.makeText(this,"Falha",Toast.LENGTH_LONG).show()
+                val novaTela = Intent(this, ListViewActivity::class.java)
+
+                startActivity(novaTela)
+
+
+            } else {
+
+                Toast.makeText(this, "Dados Invalidos", Toast.LENGTH_LONG).show()
             }
 
+        }
 
     }
 

@@ -2,6 +2,7 @@ package com.example.rizzadinha.teste
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
@@ -70,6 +71,20 @@ class BDManager(context: Context) : SQLiteOpenHelper(context, NOME_BD,null,1){
         return validaUsuario
 
     }
+
+
+    fun getList() : Cursor{
+
+        val query = "SELECT * FROM " +NOME_TABELA
+
+        val db = this.writableDatabase
+
+        val cursor = db.rawQuery(query,null)
+
+        return cursor
+
+    }
+
 
 
 
